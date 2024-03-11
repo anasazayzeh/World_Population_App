@@ -47,18 +47,17 @@ def try_convert_to_numeric(column_name, errors='coerce'):
 
 df ["Population"] = try_convert_to_numeric("Population", errors='coerce')
 df ["PopulationGrowth"] = try_convert_to_numeric("PopulationGrowth", errors='ignore')
-#df ["Year"] = try_convert_to_numeric("Year", errors='coerce')
 
 # Clean commas in the Year column
 #df["Year"] = df["Year"].str.replace(",", "", regex=True)
 
 chart_data = df[["Year", "Population", "PopulationGrowth"]]  
 
-df['Year'].dtype 
+#df['Year'].dtype 
 
-df['Population'].dtype 
-df['PopulationGrowth'].dtype 
-df['Density (Pop/km2)'].dtype 
+#df['Population'].dtype 
+#df['PopulationGrowth'].dtype 
+#df['Density (Pop/km2)'].dtype 
 
 
 #chart_data["Population"] = chart_data["Population"] / 1000000  
@@ -105,50 +104,28 @@ selected_year = st.slider("Select Year:", min_year , max_year)
 # Display the selected year as a label
 st.write(f"Selected Year: {selected_year}")
 
-class MyDataObject:
-  def __init__(self, value):
-    self.value = value
 
 
-selected_year = MyDataObject(selected_year)
+Startyear = 1970  # Example value
+Endyear = 2000  # Example value
+selected_range = st.slider("Select Range of Years:", min_year, max_year, (Startyear, Endyear))
 
-# Function to display population based on selected year
-def display_population(selected_year):
-  # Filter DataFrame for the chosen year
-  filtered_df = new_df[new_df['Year'] == selected_year]
-
-  # Check if any data found for the year
-  if filtered_df.empty:
-    st.write(f"No data found for year {selected_year}.")
-  else:
-    # Get population value (assuming a single 'Population' column)
-    population = filtered_df['Population'].values[0]
-    YearlyGrowth  = filtered_df['Yearly Growth %'].values[0]  # Assuming another column for chart
-
-    st.write(f"Population for year {selected_year}: {population}")
-
-  # Create your desired chart (replace with your chart type and customization)
-    plt.figure(figsize=(5, 9))
-    plt.bar(selected_year, population, color='skyblue')  # Example bar chart
-    plt.xlabel('Year')
-    plt.ylabel('Population')
-    plt.title(f"Population in {selected_year}")
-    plt.grid(True)
-    st.pyplot()
-
-display_population(selected_year)
+Startyear = selected_range[0]  # Assuming first element is start year
+Endyear = selected_range[1]   # Assuming second element is end year
+st.write(f"Selected Years: {Startyear} - {Endyear}")
 
 
+Startyear = int(selected_range[0])
+Endyear = int(selected_range[1])
+new_df ["Year"] = try_convert_to_numeric("Year", errors='coerce')
 
-def create_chart(selected_series):
-  plt.figure(figsize=(8, 5))  # Set chart size (optional)
-  plt.plot(new_df['Year'], new_df[selected_series])
-  plt.xlabel('Year')
-  plt.ylabel(selected_series)
-  plt.title(f"{selected_series} Over Time")
-  plt.grid(True)
-  # Customize your chart further (e.g., colors, markers, legends)
-  st.pyplot()  # Display the chart in Streamlit
+
+filtered_df = new_df[new_df['Year'].between(Startyear, Endyear)]
+
+filtered_df['Year'] = filtered_df['Year'].astype(str)
+filtered_df["Year"] = filtered_df["Year"].str.replace(",", "", regex=True)
+
+st.line_chart(filtered_df, x="Year", y=["PopulationGrowth","PopulationArea"], color=None, width=0, height=0, use_container_width=True)
 
 
 # You can use st.write, st.chart etc. to display data
