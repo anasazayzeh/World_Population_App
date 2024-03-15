@@ -19,7 +19,10 @@ st.header('World Population has been increasing at an exponential rate for the p
 
 # Add your data visualizations and interesting fact explanations here
 
-#st.dataframe(df)
+on = st.toggle('Show Data')
+
+if on:
+    st.dataframe(df)
 
 # Clean commas in the Population column
 df["Population"] = df["Population"].str.replace(",", "", regex=True)
