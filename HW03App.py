@@ -69,8 +69,8 @@ st.bar_chart(chart_data, x="Year", y="PopulationGrowth",)
 new_df = df.assign(PopulationArea=df['Population'] / df['Density (Pop/km2)'])
 
 # Display interesting facts (assuming new_df has calculated PopulationDensity (Pop/km2))
-st.subheader('Lets Calculate the population foot print , Did it increase as well ? ', anchor=None, *, help=None, divider=False)st.write(f"Average population Density (Pop/km2): {new_df['PopulationArea'].mean():.2f}")  # Example: Calculate and display average Density (Pop/km2)
-
+st.subheader('Lets Calculate the population foot print , Did it increase as well ? ', anchor=None, help=None, divider=False)
+st.write(f"Average population Density (Pop/km2): {new_df['PopulationArea'].mean():.2f}")  # Example: Calculate and display average Density (Pop/km2)
 st.dataframe(new_df)
 
 new_chart_data = new_df[["Year", "Population", "PopulationGrowth", "PopulationArea",'Density (Pop/km2)', "Yearly Growth %"]]  
