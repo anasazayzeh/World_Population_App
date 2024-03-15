@@ -8,7 +8,7 @@ import numpy as np
 
 
 # Read the CSV data
-df = pd.read_csv(r"https://github.com/anasazayzeh/World_Population_App/blob/main/Data.csv", dtype={"Year": object})
+df = pd.read_csv(r"Data.csv", dtype={"Year": object})
 df = df.rename(columns={'Number': 'PopulationGrowth'})
 
 
