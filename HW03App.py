@@ -77,6 +77,9 @@ new_chart_data = new_df[["Year", "Population", "PopulationGrowth", "PopulationAr
 
 st.bar_chart(new_chart_data, x="Year", y="PopulationArea",)
 
+st.subheader('Interesting Fact: Although World Population has increased 3X , yet the footprint remained constant at 150M km2 ', anchor=None, help=None, divider=False)
+
+
 st.scatter_chart(new_chart_data, 
                  x="Year", 
                  y=["Population","PopulationArea", ],
