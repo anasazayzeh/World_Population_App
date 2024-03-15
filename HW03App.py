@@ -15,7 +15,7 @@ df = df.rename(columns={'Number': 'PopulationGrowth'})
 
 # Title for your app
 st.title("Interesting facts about world population")
-st.header('World Population has been increasing at an exponential rate for the past decades', anchor=None, *, help=None, divider=False)
+st.header('World Population has been increasing at an exponential rate for the past decades', anchor=None, help=None, divider=False)
 
 # Add your data visualizations and interesting fact explanations here
 
