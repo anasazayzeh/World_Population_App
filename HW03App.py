@@ -19,7 +19,7 @@ st.header('World Population has been increasing at an exponential rate for the p
 
 # Add your data visualizations and interesting fact explanations here
 
-st.dataframe(df)
+#st.dataframe(df)
 
 # Clean commas in the Population column
 df["Population"] = df["Population"].str.replace(",", "", regex=True)
@@ -102,10 +102,10 @@ min_year = int(min_year)
 max_year = int(max_year)
 
 # Slider for year selection (integer values)
-selected_year = st.slider("Select Year:", min_year , max_year)
+#selected_year = st.slider("Select Year:", min_year , max_year)
 
 # Display the selected year as a label
-st.write(f"Selected Year: {selected_year}")
+#st.write(f"Selected Year: {selected_year}")
 
 
 
